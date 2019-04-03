@@ -6,7 +6,7 @@ const Professor = new Schema({
     name : String,
     last_name : String,
 	dni : String,
-	charge : Array
+	classroom_list : Array
 });
 
 module.exports = mongoose.model('Professor', Professor);
