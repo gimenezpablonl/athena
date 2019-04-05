@@ -6,10 +6,12 @@ const methodOverride = require("method-override");
 const session = require("express-session")
 const exphbs = require("express-handlebars");
 const path = require("path");
+const passport = require("passport");
 
 
 const app = express();
 // SETTINGS
+require('./config/passport');
 app.set('port', process.env.PORT || 3000);
 mongoose.connect('mongodb://localhost/athena', {useNewUrlParser: true })
     .then(db => console.log('DB is connected'))
@@ -32,8 +34,11 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 // ROUTES
 app.use('/', require('./routes/index'));
+app.use('/', require('./routes/users'));
 app.use('/config', require('./routes/root'));
 // Static files
 app.use(express.static(__dirname + '/public'));
