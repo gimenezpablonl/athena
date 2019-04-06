@@ -3,13 +3,14 @@ const passport = require('passport');
 const User = require('../models/User');
 const router = express.Router();
 
-router.get('/join', (req,res) =>{
+router.get('/signup', (req,res) =>{
     res.render('users/signup');
 })
-router.post('/join', async (req,res) => {
+router.post('/signup', async (req,res) => {
     const { username, email, password} = req.body;
     const user = new User({username, email, password});
-    newUser.password = await user.encryptPassword(password);
+    user.password = await user.encryptPassword(password);
+    user.position = 0;
     await user.save();
     res.redirect('/login');
 })
@@ -21,4 +22,8 @@ router.post('/login', passport.authenticate('local', {
     failureRedirect: '/login'
   }));
 
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
 module.exports = router;

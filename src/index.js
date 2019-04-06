@@ -36,11 +36,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+// GLOBAL VARIABLES
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+  });
 // ROUTES
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/users'));
 app.use('/config', require('./routes/root'));
-// Static files
+// STATIC FILES
 app.use(express.static(__dirname + '/public'));
 // SERVER
 app.listen(app.get('port'), () => {
