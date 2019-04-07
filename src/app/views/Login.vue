@@ -10,33 +10,19 @@
 </template>
 
 <script>
-class User{
-    constructor(username,password){
-        this.username = username;
-        this.password = password;
-    }
-}
 export default {
     data(){
         return {
             username : '',
             password : '',
-            user : new User()
         }
     },
     methods: {
         login(){
-            this.user.username = this.username;
-            this.user.password = this.password;
-            fetch('/login',{
-                method: 'POST',
-                body: JSON.stringify(this.user),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-type': 'application/json'
-                }
-            })
-            .then(res => console.log(res))
+            const { username, password } = this
+            this.$store.dispatch('login', { username, password })
+            .then(() => this.$router.push('/'))
+            .catch(err => console.log(err))
         }
     }
 }
