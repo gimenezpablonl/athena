@@ -6,7 +6,7 @@ const User = new Schema({
     username : String,
     password : String,
     email: String,
-    position : Number
+    record_number : Number
 });
 
 User.methods.encryptPassword = async (password) => {
