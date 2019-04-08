@@ -1,9 +1,11 @@
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const Student = require('../models/Student');
 const User = require('../models/User');
 const router = express.Router();
 
+/* USERS */
 router.post('/signup', async (req,res) => {
     const { username, email, password} = req.body;
     const user = new User({username, email, password});
@@ -13,7 +15,6 @@ router.post('/signup', async (req,res) => {
     res.redirect('/login');
 })
   router.post('/login', function (req, res, next) {
-
     passport.authenticate('local', {session: false}, (err, user, info) => {
         console.log(err);
         if (err || !user) {
@@ -34,12 +35,42 @@ router.post('/signup', async (req,res) => {
         });
     })
     (req, res);
-
 });
-
-
 router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
   });
 module.exports = router;
+
+
+/* STUDENTS */
+
+router.post('/api/students/get', async (req, res) =>{
+    const {username} = req.body;
+    console.log(username, 'requested the list of students');
+    const students = await Student.find();
+    res.json(students);
+})
+
+router.post('/api/students/post', async (req, res) =>{
+    const { record_number, name, last_name, dni } = req.body;
+    const student = new Student({record_number, name, last_name, dni});
+    await student.save();
+    res.json({
+        'msg': 'student created succesufully'
+    })
+})
+
+router.put('/api/students/put:id', async (req,res) =>{
+    await Student.findByIdAndUpdate(req.params.id, req.body);
+    res.json({
+        'msg' : '/api/students/put successful'
+    })
+})
+
+router.delete('api/students/delete:id' , async (req,res) => {
+    await Student.findOneAndRemove(req.params.id);
+    res.json({
+        'msg' : '/api/students/delete successful'
+    })
+})
