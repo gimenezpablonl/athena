@@ -2,6 +2,10 @@ const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const Student = require('../models/Student');
+const Professor = require('../models/Professor');
+const Headmaster = require('../models/Headmaster');
+const Classroom = require('../models/Classroom');
+const Asignature = require('../models/Asignature');
 const User = require('../models/User');
 const router = express.Router();
 
@@ -61,16 +65,54 @@ router.post('/api/students/post', async (req, res) =>{
     })
 })
 
-router.put('/api/students/put:id', async (req,res) =>{
+router.put('/api/students/put/:id', async (req,res) =>{
     await Student.findByIdAndUpdate(req.params.id, req.body);
     res.json({
         'msg' : '/api/students/put successful'
     })
 })
 
-router.delete('api/students/delete:id' , async (req,res) => {
-    await Student.findOneAndRemove(req.params.id);
+router.delete('/api/students/delete/:id' , async (req,res) => {
+    await Student.findByIdAndRemove(req.params.id);
     res.json({
         'msg' : '/api/students/delete successful'
     })
 })
+
+/* PROFESSOR */
+
+router.post('/api/professors/get', async (req, res) =>{
+    const {username} = req.body;
+    console.log(username, 'requested the list of professors');
+    const professors = await Professor.find();
+    res.json(professors);
+})
+
+router.post('/api/professors/post', async (req, res) =>{
+    const { record_number, name, last_name, dni, classroom_list } = req.body;
+    const professor = new Professor({record_number, name, last_name, dni, classroom_list});
+    await professor.save();
+    res.json({
+        'msg': 'professor created succesufully'
+    })
+})
+
+router.put('/api/professors/put/:id', async (req,res) =>{
+    await Professor.findByIdAndUpdate(req.params.id, req.body);
+    res.json({
+        'msg' : '/api/professors/put successful'
+    })
+})
+
+router.delete('/api/professors/delete/:id' , async (req,res) => {
+    await Professor.findByIdAndRemove(req.params.id);
+    res.json({
+        'msg' : '/api/professors/delete successful'
+    })
+})
+
+/* HEADMASTER */
+
+/* CLASSROOM */
+
+/* ASIGNATURE */
