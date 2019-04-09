@@ -1,12 +1,29 @@
 <template>  
-    <div>    
-        <h2>Login</h2>    
-        <form @submit.prevent="login">    
-            <input required v-model="username" type="text" name="username" /><br>    
-            <input required v-model="password" type="password" name="password" /><br>    
-            <input type="submit" value="Login" />    
-        </form>    
-    </div>
+<div id="app">
+  <v-app id="inspire">
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout justify-center>
+          <v-flex xs12 sm8 md4>
+            <v-card class="elevation-12">
+              <v-toolbar dark color="primary">
+                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-spacer></v-spacer>
+              </v-toolbar>
+              <v-card-text>
+                <v-form @submit.prevent="login()">
+                    <v-text-field v-model="username" prepend-icon="person" name="username" label="Username" type="text"></v-text-field>
+                    <v-text-field v-model="password" prepend-icon="lock" name="password" label="Password" id="password" type="password"></v-text-field>
+                    <v-btn type="submit" color="primary">Login</v-btn>
+                </v-form>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
+</div>
 </template>
 
 <script>
