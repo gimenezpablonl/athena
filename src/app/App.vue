@@ -4,7 +4,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link>
-      <router-link to="/admin">Administration</router-link>
+      <router-link to="/admin"><span v-if="isLoggedIn">Administration</span></router-link>
       <span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
     </div>
     <router-view/>
