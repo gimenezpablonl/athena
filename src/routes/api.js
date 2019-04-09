@@ -61,14 +61,15 @@ router.post('/api/students/post', async (req, res) =>{
     const student = new Student({record_number, name, last_name, dni});
     await student.save();
     res.json({
-        'msg': 'student created succesufully'
+        'msg': 'student created successfully',
+        'student': student
     })
 })
 
 router.put('/api/students/put/:id', async (req,res) =>{
     await Student.findByIdAndUpdate(req.params.id, req.body);
     res.json({
-        'msg' : '/api/students/put successful'
+        'msg' : '/api/students/put successful',
     })
 })
 
@@ -93,7 +94,8 @@ router.post('/api/professors/post', async (req, res) =>{
     const professor = new Professor({record_number, name, last_name, dni, classroom_list});
     await professor.save();
     res.json({
-        'msg': 'professor created succesufully'
+        'msg': 'professor created succesufully',
+        'professor': professor
     })
 })
 

@@ -17,14 +17,6 @@ mongoose.connect('mongodb://localhost/athena', {useNewUrlParser: true })
     .then(db => console.log('DB is connected'))
     .catch(err => console.error(err));
     var jwtkey = 'clave';
-/* app.set('views', path.join(__dirname, 'views'));
-app.engine('.hbs', exphbs({
-    defaultLayout: 'main',
-    layoutsDir: path.join(app.get('views'), 'layouts'),
-    partialsDir: path.join(app.get('views'), 'partials'),
-    extname: '.hbs'
-}));
-app.set('view engine', '.hbs'); */
 // MIDDLEWARES
 app.use(morgan('dev'));
 app.use(methodOverride('_method'));
@@ -39,8 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 // GLOBAL VARIABLES
 // ROUTES
-/* app.use('/', require('./routes/index')); */
-app.use('/', require('./routes/users'));
+app.use('/', require('./routes/api'));
 app.use('/', require('./routes/admin'));
 app.use('/config',passport.authenticate('jwt', {session:false}), require('./routes/root'));
 // STATIC FILES
