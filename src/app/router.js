@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import store from './store'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
+import Professors from './views/admin/Professors.vue'
+import Students from './views/admin/Students.vue'
 import Administration from './views/Administration.vue'
 Vue.use(Router)
 
@@ -25,9 +27,6 @@ const router =  new Router({
     {
       path: '/login',
       name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: Login
     },
     {
@@ -41,7 +40,23 @@ const router =  new Router({
       meta:{
         requiresAuth: true
       }
+    },
+    {
+      path: '/admin/professors',
+      name: 'professors',
+      component: Professors,
+      meta:{
+        requiresAuth: true
+      }
+  },
+    {
+    path: '/admin/students',
+    name: 'students',
+    component: Students,
+    meta:{
+      requiresAuth: true
     }
+  }
   ]
 })
 
