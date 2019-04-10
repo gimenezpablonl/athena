@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 
 const Classroom = new Schema({
     code: String,
-    name: String,
     asignatures: Array
 });
 

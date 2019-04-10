@@ -3,10 +3,19 @@ const { Schema } = mongoose;
 const bcrypt = require('bcryptjs');
 
 const User = new Schema({
-    username : String,
+    username : {
+      type: String,
+      unique: true
+    },
     password : String,
-    email: String,
-    record_number : Number
+    email: {
+      type: String,
+      unique: true
+    },
+    record_number: {
+      type: String,
+      unique: true
+    }
 });
 
 User.methods.encryptPassword = async (password) => {
