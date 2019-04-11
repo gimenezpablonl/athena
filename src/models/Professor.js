@@ -12,7 +12,9 @@ const Professor = new Schema({
         type: String,
         unique: true
     },
-	classroom_list : Array
+    sex: Boolean,
+    birthday: Date,
+	asignature_list: Array
 });
 
 module.exports = mongoose.model('Professor', Professor);
