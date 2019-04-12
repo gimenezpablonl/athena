@@ -4,12 +4,20 @@ const { Schema } = mongoose;
 const Headmaster = new Schema({
     record_number:{
         type: Number,
+        required: true,
         unique: true
     },
-    name: String,
-    last_name: String,
+    name:{
+        type: String,
+        required: true
+    },
+    last_name:{
+        type: String,
+        required: true
+    },
 	dni:{
         type: String,
+        required: true,
         unique: true
     }
 });

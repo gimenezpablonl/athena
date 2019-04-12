@@ -13,7 +13,7 @@ const app = express();
 // SETTINGS
 require('./config/passport');
 app.set('port', process.env.PORT || 3000);
-mongoose.connect('mongodb://localhost/athena', {useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/athena', {useCreateIndex: true,useNewUrlParser: true })
     .then(db => console.log('DB is connected'))
     .catch(err => console.error(err));
     var jwtkey = 'clave';

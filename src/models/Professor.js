@@ -6,14 +6,27 @@ const Professor = new Schema({
         type: Number,
         unique: true
     },
-    name: String,
-    last_name: String,
+    name:{
+        type: String,
+        required: true
+    },
+    last_name:{
+        type: String,
+        required: true
+    },
     dni:{
         type: String,
+        required: true,
         unique: true
     },
-    sex: Boolean,
-    birthday: Date,
+    sex:{
+        type: Boolean,
+        required: true
+    },
+    birthday:{
+        type: Date,
+        required: true
+    },
 	asignature_list: Array
 });
 

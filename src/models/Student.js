@@ -4,16 +4,29 @@ const { Schema } = mongoose;
 const Student = new Schema({
     record_number:{
         type: Number,
-        unique: true
+        unique: true,
     },
-    name: String,
-    last_name: String,
+    name:{
+        type: String,
+        required: true
+    },
+    last_name:{
+        type: String,
+        required: true
+    },
 	dni:{
         type: String,
+        required: true,
         unique: true
     },
-    sex: Boolean,
-    birthday: Date
+    sex:{
+        type: Boolean,
+        required: true
+    },
+    birthday:{
+        type: Boolean,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('Student', Student);
