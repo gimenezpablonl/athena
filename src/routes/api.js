@@ -90,8 +90,8 @@ router.post('/api/professors/get', async (req, res) =>{
 })
 
 router.post('/api/professors/post', async (req, res) =>{
-    const { record_number, name, last_name, dni, classroom_list } = req.body;
-    const professor = new Professor({record_number, name, last_name, dni, classroom_list});
+    const { record_number, name, last_name, dni, asignatures } = req.body;
+    const professor = new Professor({record_number, name, last_name, dni, asignatures});
     await professor.save();
     res.json({
         'msg': 'professor created succesufully',
