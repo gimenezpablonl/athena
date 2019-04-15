@@ -9,7 +9,7 @@ const Asignature = require('../models/Asignature');
 const User = require('../models/User');
 const router = express.Router();
 
-/* USERS */
+/* USERS AUTHENTICATION*/
 router.post('/signup', async (req,res) => {
     const { username, email, password} = req.body;
     const user = new User({username, email, password});
@@ -118,3 +118,20 @@ router.delete('/api/professors/delete/:id' , async (req,res) => {
 /* CLASSROOM */
 
 /* ASIGNATURE */
+
+/* USERS PROFILE*/
+
+router.get('/:username', (req,res) =>{
+    const username = req.params.username;
+    User.findOne({username: username}, function(err, user){
+        if (err){
+            console.log(err);
+        }
+        user = user.toJSON();
+        delete user.password;
+        delete user._id
+        res.json({
+            'user': user
+        })
+    })
+})
